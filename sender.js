@@ -23,9 +23,16 @@ function getLink() {
         // Parse JSON object
         var data = Http.responseText;
         var jsonResponse = JSON.parse(data);
-        console.log(jsonResponse["link"]);
+        console.log(jsonResponse["id"]);
         // Display
-        document.getElementById("live_link").innerHTML = jsonResponse["id"];
-        document.getElementById("live_link").value = jsonResponse["id"];
+        if (Http.status == "200"){
+            document.getElementById("message").innerHTML = "";
+            document.getElementById("live_link").innerHTML = jsonResponse["id"];
+            document.getElementById("live_link").value = jsonResponse["id"];
+        } else {
+            document.getElementById("message").innerHTML = "Invalid Input, Try Again.";
+            document.getElementById("live_link").innerHTML = "";
+            document.getElementById("live_link").value = "";
+        }
     }
 }

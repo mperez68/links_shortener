@@ -6,10 +6,11 @@
 const header = [ 'Authorization', 'Content-Type' ];
 const value = ['Bearer c6587bbba967a126151630b08a1dfe8b09a9fdbe', 'application/json'];
 
+// Retrieves functional shortened link. Bitly stores links and returns it if called a second time.
 function getLink() {
     // Retrieve input from user
     var link = document.getElementById("long_url").value;
-    var dataString = '{ "long_url": "' + link + '", "domain": "bit.ly", "group_guid": "Bm147SyNhAU" }';
+    var dataString = '{ "long_url": "' + link + '", "domain": "bit.ly", "group_guid": "Bm147SyNhAU"  }';
     // Package and POST information
     const Http = new XMLHttpRequest();
     const url='https://api-ssl.bitly.com/v4/shorten';
@@ -24,6 +25,7 @@ function getLink() {
         var jsonResponse = JSON.parse(data);
         console.log(jsonResponse["link"]);
         // Display
-        document.getElementById("new_link").innerHTML = jsonResponse["link"];
+        document.getElementById("live_link").innerHTML = jsonResponse["id"];
+        document.getElementById("live_link").value = jsonResponse["id"];
     }
 }
